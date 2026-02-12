@@ -2,6 +2,7 @@ import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
 from ttkbootstrap.tableview import Tableview
 import tkinter as tk
+from tkinter import messagebox
 from datetime import datetime
 
 from models.database import init_db
@@ -254,7 +255,7 @@ class MainWindow(ttk.Window):
             self.clear_form()
             self.refresh_employees()
         except ValueError as e:
-            ttk.MessageBox.show_error("Error", "Por favor ingrese valores numéricos válidos")
+            messagebox.showerror("Error", "Por favor ingrese valores numéricos válidos")
 
     def clear_form(self):
         self.current_employee = None
@@ -271,7 +272,7 @@ class MainWindow(ttk.Window):
 
     def delete_employee(self):
         if self.current_employee:
-            if ttk.MessageBox.yesno("Confirmar", f"¿Eliminar a {self.current_employee.name}?"):
+            if messagebox.askyesno("Confirmar", f"¿Eliminar a {self.current_employee.name}?"):
                 self.current_employee.delete()
                 self.clear_form()
                 self.refresh_employees()
@@ -327,7 +328,7 @@ class MainWindow(ttk.Window):
         data = Payroll.get_all_by_month(month, year)
         
         if not data:
-            ttk.MessageBox.show_warning("Advertencia", "No hay datos para exportar")
+            messagebox.showwarning("Advertencia", "No hay datos para exportar")
             return
         
         from tkinter import filedialog
@@ -340,9 +341,9 @@ class MainWindow(ttk.Window):
         if filename:
             try:
                 ExportUtils.export_to_pdf(data, filename)
-                ttk.MessageBox.show_info("Éxito", f"PDF exportado a:\n{filename}")
+                messagebox.showinfo("Éxito", f"PDF exportado a:\n{filename}")
             except Exception as e:
-                ttk.MessageBox.show_error("Error", f"Error al exportar: {str(e)}")
+                messagebox.showerror("Error", f"Error al exportar: {str(e)}")
 
     def export_excel(self):
         month = int(self.report_month.get())
@@ -350,7 +351,7 @@ class MainWindow(ttk.Window):
         data = Payroll.get_all_by_month(month, year)
         
         if not data:
-            ttk.MessageBox.show_warning("Advertencia", "No hay datos para exportar")
+            messagebox.showwarning("Advertencia", "No hay datos para exportar")
             return
         
         from tkinter import filedialog
@@ -363,6 +364,6 @@ class MainWindow(ttk.Window):
         if filename:
             try:
                 ExportUtils.export_to_excel(data, filename)
-                ttk.MessageBox.show_info("Éxito", f"Excel exportado a:\n{filename}")
+                messagebox.showinfo("Éxito", f"Excel exportado a:\n{filename}")
             except Exception as e:
-                ttk.MessageBox.show_error("Error", f"Error al exportar: {str(e)}")
+                messagebox.showerror("Error", f"Error al exportar: {str(e)}")
