@@ -40,7 +40,7 @@ class ExportUtils:
         elements.append(Spacer(1, 20))
         
         headers = ['Nombre', 'DPI', 'Cargo', 'Salario Base', 'Horas Extras', 
-                   'AFP', 'ISSS', 'Otros', 'Salario Neto']
+                   'INATEC', 'INSS', 'Otros', 'Salario Neto']
         table_data = [headers]
         
         for row in data:
@@ -83,7 +83,7 @@ class ExportUtils:
         ws.title = "Nómina"
         
         headers = ['Nombre', 'DPI', 'Cargo', 'Salario Base', 'Horas Extras', 
-                   'AFP', 'ISSS', 'Otros Descuentos', 'Salario Neto']
+                   'INATEC', 'INSS', 'Otros Descuentos', 'Salario Neto']
         
         header_fill = PatternFill(start_color="366092", end_color="366092", fill_type="solid")
         header_font = Font(bold=True, color="FFFFFF")

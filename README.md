@@ -1,12 +1,12 @@
 # Sistema de Nóminas - Nicaragua
 
-Aplicación de escritorio para la gestión de nómina de empleados con deducciones AFP e ISSS propias de Nicaragua.
+Aplicación de escritorio para la gestión de nómina de empleados con deducciones INATEC e INSS propias de Nicaragua.
 
 ## Características
 
 - **Gestión de Empleados**: Agregar, editar, eliminar y listar empleados
 - **Cálculo de Nómina**: Cálculo automático de salario neto con deducciones
-- **Deducciones Configurables**: AFP (6.25%) e ISSS (3.0%) por defecto
+- **Deducciones Configurables**: INATEC (2%) e INSS (6.25%) por defecto
 - **Horas Extras**: Registro y cálculo de horas extras con tarifa configurable
 - **Reportes**: Dashboard con métricas totales
 - **Exportación**: Exportar nóminas a PDF y Excel
@@ -87,9 +87,9 @@ El sistema utiliza SQLite. La base de datos se crea automáticamente al iniciar 
 
 ```
 Salario Bruto = Salario Base + (Horas Extras × Tarifa/Hora)
-Deducción AFP = Salario Bruto × 6.25%
-Deducción ISSS = Salario Bruto × 3.0%
-Salario Neto = Salario Bruto - AFP - ISSS - Otros Descuentos
+Deducción INATEC = Salario Bruto × 2%
+Deducción INSS = Salario Bruto × 6.25%
+Salario Neto = Salario Bruto - INATEC - INSS - Otros Descuentos
 ```
 
 ## Exportación
@@ -100,8 +100,8 @@ Los reportes exportados incluyen:
 - Cargo
 - Salario base
 - Horas extras
-- Deducción AFP
-- Deducción ISSS
+- Deducción INATEC
+- Deducción INSS
 - Otros descuentos
 - Salario neto
 

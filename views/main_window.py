@@ -73,14 +73,14 @@ class MainWindow(ttk.Window):
         self.entry_hourly_rate = ttk.Entry(inner_form, width=30)
         self.entry_hourly_rate.grid(row=5, column=1, pady=5, padx=5)
         
-        ttk.Label(inner_form, text="Tasa AFP %:").grid(row=6, column=0, sticky=W, pady=5)
+        ttk.Label(inner_form, text="Tasa INATEC %:").grid(row=6, column=0, sticky=W, pady=5)
         self.entry_afp = ttk.Entry(inner_form, width=30)
-        self.entry_afp.insert(0, "6.25")
+        self.entry_afp.insert(0, "2")
         self.entry_afp.grid(row=6, column=1, pady=5, padx=5)
         
-        ttk.Label(inner_form, text="Tasa ISSS %:").grid(row=7, column=0, sticky=W, pady=5)
+        ttk.Label(inner_form, text="Tasa INSS %:").grid(row=7, column=0, sticky=W, pady=5)
         self.entry_isss = ttk.Entry(inner_form, width=30)
-        self.entry_isss.insert(0, "3.0")
+        self.entry_isss.insert(0, "6.25")
         self.entry_isss.grid(row=7, column=1, pady=5, padx=5)
         
         btn_frame = ttk.Frame(inner_form)
@@ -142,8 +142,8 @@ class MainWindow(ttk.Window):
                 {"text": "Nombre", "anchor": "w", "width": 150},
                 {"text": "Salario Base", "anchor": "e", "width": 100},
                 {"text": "Horas Extras", "anchor": "e", "width": 100},
-                {"text": "AFP", "anchor": "e", "width": 80},
-                {"text": "ISSS", "anchor": "e", "width": 80},
+                {"text": "INATEC", "anchor": "e", "width": 80},
+                {"text": "INSS", "anchor": "e", "width": 80},
                 {"text": "Otros", "anchor": "e", "width": 80},
                 {"text": "Salario Neto", "anchor": "e", "width": 100},
             ],
@@ -192,8 +192,8 @@ class MainWindow(ttk.Window):
                 {"text": "Cargo", "anchor": "w", "width": 100},
                 {"text": "Salario Base", "anchor": "e", "width": 90},
                 {"text": "Horas Extras", "anchor": "e", "width": 90},
-                {"text": "AFP", "anchor": "e", "width": 70},
-                {"text": "ISSS", "anchor": "e", "width": 70},
+                {"text": "INATEC", "anchor": "e", "width": 70},
+                {"text": "INSS", "anchor": "e", "width": 70},
                 {"text": "Otros", "anchor": "e", "width": 70},
                 {"text": "Salario Neto", "anchor": "e", "width": 90},
             ],
