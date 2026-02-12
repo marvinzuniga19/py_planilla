@@ -38,11 +38,6 @@ env\Scripts\activate
 pip install -r requirements.txt
 ```
 
-4. Instalar librerías adicionales para exportación:
-```bash
-pip install reportlab openpyxl
-```
-
 ## Uso
 
 Ejecutar la aplicación:
