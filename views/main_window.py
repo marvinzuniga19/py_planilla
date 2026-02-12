@@ -208,7 +208,7 @@ class MainWindow(ttk.Window):
         self.emp_table.delete_rows()
         for emp in employees:
             self.emp_table.insert_row(values=(
-                emp.id, emp.name, emp.dpi, emp.position, f"${emp.salary:.2f}"
+                emp.id, emp.name, emp.dpi, emp.position, f"C$ {emp.salary:,.2f}"
             ))
         self.emp_table.load_table_data()
 
@@ -290,12 +290,12 @@ class MainWindow(ttk.Window):
             
             self.payroll_table.insert_row(values=(
                 emp.name,
-                f"${payroll.base_salary:.2f}",
-                f"${payroll.extra_hours_amount:.2f}",
-                f"${payroll.total_afp:.2f}",
-                f"${payroll.total_isss:.2f}",
-                f"${payroll.other_discounts:.2f}",
-                f"${payroll.net_salary:.2f}"
+                f"C$ {payroll.base_salary:,.2f}",
+                f"C$ {payroll.extra_hours_amount:,.2f}",
+                f"C$ {payroll.total_afp:,.2f}",
+                f"C$ {payroll.total_isss:,.2f}",
+                f"C$ {payroll.other_discounts:,.2f}",
+                f"C$ {payroll.net_salary:,.2f}"
             ))
         self.payroll_table.load_table_data()
 
@@ -312,12 +312,12 @@ class MainWindow(ttk.Window):
                 row['name'],
                 row['dpi'],
                 row['position'],
-                f"${row['base_salary']:.2f}",
-                f"${row['extra_hours_amount']:.2f}",
-                f"${row['total_afp']:.2f}",
-                f"${row['total_isss']:.2f}",
-                f"${row['other_discounts']:.2f}",
-                f"${row['net_salary']:.2f}"
+                f"C$ {row['base_salary']:,.2f}",
+                f"C$ {row['extra_hours_amount']:,.2f}",
+                f"C$ {row['total_afp']:,.2f}",
+                f"C$ {row['total_isss']:,.2f}",
+                f"C$ {row['other_discounts']:,.2f}",
+                f"C$ {row['net_salary']:,.2f}"
             ))
         self.report_table.load_table_data()
 
