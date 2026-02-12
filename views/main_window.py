@@ -213,10 +213,10 @@ class MainWindow(ttk.Window):
         self.emp_table.load_table_data()
 
     def on_employee_select(self, event):
-        selection = self.emp_table.get_selection()
+        selection = self.emp_table.view.selection()
         if selection:
-            item = selection[0]
-            emp_id = item.values[0]
+            item_iid = selection[0]
+            emp_id = self.emp_table.view.item(item_iid)["values"][0]
             employee = Employee.get_by_id(emp_id)
             if employee:
                 self.current_employee = employee
