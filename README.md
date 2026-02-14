@@ -6,9 +6,9 @@ Aplicación de escritorio para la gestión de nómina de empleados con deduccion
 
 - **Gestión de Empleados**: Agregar, editar, eliminar y listar empleados
 - **Cálculo de Nómina**: Cálculo automático de salario neto con deducciones
-- **Deducciones Configurables**: INATEC (2%) e INSS (6.25%) por defecto
+- **Deducciones Configurables**: INATEC y INSS con tasas personalizadas por empleado
 - **Horas Extras**: Registro y cálculo de horas extras con tarifa configurable
-- **Reportes**: Dashboard con métricas totales
+- **Reportes**: Dashboard con métricas totales por período
 - **Exportación**: Exportar nóminas a PDF y Excel
 - **Moneda**: Córdoba Nicaragüense (C$)
 
@@ -68,7 +68,7 @@ python_planillas/
 ├── controllers/
 │   └── payroll.py        # Lógica de nómina
 └── utils/
-    └── export.py        # Exportación PDF/Excel
+    └── export.py         # Exportación PDF/Excel
 ```
 
 ## Base de Datos
@@ -78,7 +78,7 @@ El sistema utiliza SQLite. La base de datos se crea automáticamente al iniciar 
 ### Tablas
 
 **employees**: Empleados
-- id, name, dpi, position, salary, hours_extra, hourly_rate, afp_rate, isss_rate
+- id, name, dpi, position, salary, hours_extra, hourly_rate, afp_rate (INATEC), isss_rate (INSS)
 
 **payroll**: Nómina por período
 - id, employee_id, month, year, base_salary, extra_hours_amount, total_afp, total_isss, other_discounts, net_salary
@@ -87,10 +87,25 @@ El sistema utiliza SQLite. La base de datos se crea automáticamente al iniciar 
 
 ```
 Salario Bruto = Salario Base + (Horas Extras × Tarifa/Hora)
-Deducción INATEC = Salario Bruto × 2%
-Deducción INSS = Salario Bruto × 6.25%
+Deducción INATEC = Salario Bruto × (Tasa INATEC / 100)
+Deducción INSS = Salario Bruto × (Tasa INSS / 100)
 Salario Neto = Salario Bruto - INATEC - INSS - Otros Descuentos
 ```
+
+### Valores por Defecto
+
+- **Tasa INATEC**: 6.25%
+- **Tasa INSS**: 3.0%
+
+Estos valores pueden ser configurados individualmente por cada empleado.
+
+## Interfaz
+
+La aplicación cuenta con tres pestañas:
+
+1. **Empleados**: Gestión de empleados con formulario y tabla filtrable
+2. **Nómina**: Cálculo mensual con vista de deducciones y salarios netos
+3. **Reportes**: Vista de datos históricos por período con exportación
 
 ## Exportación
 
@@ -99,11 +114,13 @@ Los reportes exportados incluyen:
 - DPI
 - Cargo
 - Salario base
-- Horas extras
+- Horas extras (monto)
 - Deducción INATEC
 - Deducción INSS
 - Otros descuentos
 - Salario neto
+
+Formatos disponibles: PDF y Excel
 
 ## Tecnologías
 
@@ -112,13 +129,6 @@ Los reportes exportados incluyen:
 - **PDF**: reportlab
 - **Excel**: openpyxl
 - **Tema**: superhero (oscuro)
-
-## Capturas de Pantalla
-
-La aplicación cuenta con tres pestañas:
-1. **Empleados**: Gestión de empleados con tabla filtrable
-2. **Nómina**: Cálculo mensual con totales
-3. **Reportes**: Dashboard con métricas y exportación
 
 ## Licencia
 
