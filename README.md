@@ -94,8 +94,8 @@ Salario Neto = Salario Bruto - INATEC - INSS - Otros Descuentos
 
 ### Valores por Defecto
 
-- **Tasa INATEC**: 6.25%
-- **Tasa INSS**: 3.0%
+- **Tasa INATEC**: 2%
+- **Tasa INSS**: 7%
 
 Estos valores pueden ser configurados individualmente por cada empleado.
 

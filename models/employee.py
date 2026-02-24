@@ -2,7 +2,7 @@ from models.database import get_connection
 
 class Employee:
     def __init__(self, id=None, name="", dpi="", position="", salary=0, 
-                 hours_extra=0, hourly_rate=0, afp_rate=6.25, isss_rate=3.0):
+                 hours_extra=0, hourly_rate=0, afp_rate=2.0, isss_rate=7.0):
         self.id = id
         self.name = name
         self.dpi = dpi

@@ -84,12 +84,12 @@ class MainWindow(ttk.Window):
         
         ttk.Label(inner_form, text="📊 Tasa INATEC %:", **style_config).grid(row=8, column=0, sticky=W, pady=8, padx=5)
         self.entry_afp = ttk.Entry(inner_form, width=35, font=("Segoe UI", 10))
-        self.entry_afp.insert(0, "6.25")
+        self.entry_afp.insert(0, "2")
         self.entry_afp.grid(row=8, column=1, pady=8, padx=5, sticky=EW)
         
         ttk.Label(inner_form, text="🏥 Tasa INSS %:", **style_config).grid(row=9, column=0, sticky=W, pady=8, padx=5)
         self.entry_isss = ttk.Entry(inner_form, width=35, font=("Segoe UI", 10))
-        self.entry_isss.insert(0, "3.0")
+        self.entry_isss.insert(0, "7")
         self.entry_isss.grid(row=9, column=1, pady=8, padx=5, sticky=EW)
         
         inner_form.columnconfigure(1, weight=1)
@@ -293,8 +293,8 @@ class MainWindow(ttk.Window):
                 salary=float(self.entry_salary.get() or 0),
                 hours_extra=float(self.entry_hours_extra.get() or 0),
                 hourly_rate=float(self.entry_hourly_rate.get() or 0),
-                afp_rate=float(self.entry_afp.get() or 6.25),
-                isss_rate=float(self.entry_isss.get() or 3.0)
+                afp_rate=float(self.entry_afp.get() or 2.0),
+                isss_rate=float(self.entry_isss.get() or 7.0)
             )
             employee.save()
             self.clear_form()
@@ -311,9 +311,9 @@ class MainWindow(ttk.Window):
         self.entry_hours_extra.delete(0, END)
         self.entry_hourly_rate.delete(0, END)
         self.entry_afp.delete(0, END)
-        self.entry_afp.insert(0, "6.25")
+        self.entry_afp.insert(0, "2")
         self.entry_isss.delete(0, END)
-        self.entry_isss.insert(0, "3.0")
+        self.entry_isss.insert(0, "7")
 
     def delete_employee(self):
         if self.current_employee:

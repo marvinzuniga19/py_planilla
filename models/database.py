@@ -20,8 +20,8 @@ def init_db():
             salary REAL DEFAULT 0,
             hours_extra REAL DEFAULT 0,
             hourly_rate REAL DEFAULT 0,
-            afp_rate REAL DEFAULT 6.25,
-            isss_rate REAL DEFAULT 3.0,
+            afp_rate REAL DEFAULT 2.0,
+            isss_rate REAL DEFAULT 7.0,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     """)
