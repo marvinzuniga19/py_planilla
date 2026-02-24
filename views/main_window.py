@@ -14,8 +14,8 @@ from utils.export import ExportUtils
 class MainWindow(ttk.Window):
     def __init__(self, themename):
         super().__init__(themename=themename)
-        self.title("Sistema de Nóminas")
-        self.geometry("1100x700")
+        self.title("💼 Sistema de Nóminas - Nicaragua")
+        self.geometry("1200x750")
         
         init_db()
         self.current_employee = None
@@ -40,106 +40,198 @@ class MainWindow(ttk.Window):
         self.build_reports_tab()
 
     def build_employees_tab(self):
-        left_frame = ttk.Frame(self.tab_employees)
-        left_frame.pack(side=LEFT, fill=BOTH, padx=10, pady=10)
+        left_frame = ttk.Frame(self.tab_employees, padding=10)
+        left_frame.pack(side=LEFT, fill=BOTH)
         
-        inner_form = ttk.LabelFrame(left_frame, text="Datos del Empleado")
-        inner_form.pack(fill=X, pady=5, padx=5)
+        header_frame = ttk.Frame(left_frame)
+        header_frame.pack(fill=X, pady=(0, 15))
+        ttk.Label(header_frame, text="👤 Gestión de Empleados", font=("Segoe UI", 16, "bold")).pack(side=LEFT)
         
-        inner_form = ttk.Frame(inner_form, padding=15)
-        inner_form.pack(fill=X)
+        inner_form = ttk.LabelFrame(left_frame, text="  Datos del Empleado  ")
+        inner_form.pack(fill=X, pady=(0, 10), padx=5)
         
-        ttk.Label(inner_form, text="Nombre:").grid(row=0, column=0, sticky=W, pady=5)
-        self.entry_name = ttk.Entry(inner_form, width=30)
-        self.entry_name.grid(row=0, column=1, pady=5, padx=5)
+        style_config = {"font": ("Segoe UI", 10)}
         
-        ttk.Label(inner_form, text="DPI:").grid(row=1, column=0, sticky=W, pady=5)
-        self.entry_dpi = ttk.Entry(inner_form, width=30)
-        self.entry_dpi.grid(row=1, column=1, pady=5, padx=5)
+        ttk.Label(inner_form, text="Nombre:", **style_config).grid(row=0, column=0, sticky=W, pady=8, padx=5)
+        self.entry_name = ttk.Entry(inner_form, width=35, font=("Segoe UI", 10))
+        self.entry_name.grid(row=0, column=1, pady=8, padx=5, sticky=EW)
         
-        ttk.Label(inner_form, text="Cargo:").grid(row=2, column=0, sticky=W, pady=5)
-        self.entry_position = ttk.Entry(inner_form, width=30)
-        self.entry_position.grid(row=2, column=1, pady=5, padx=5)
+        ttk.Label(inner_form, text="DPI:", **style_config).grid(row=1, column=0, sticky=W, pady=8, padx=5)
+        self.entry_dpi = ttk.Entry(inner_form, width=35, font=("Segoe UI", 10))
+        self.entry_dpi.grid(row=1, column=1, pady=8, padx=5, sticky=EW)
         
-        ttk.Label(inner_form, text="Salario Base:").grid(row=3, column=0, sticky=W, pady=5)
-        self.entry_salary = ttk.Entry(inner_form, width=30)
-        self.entry_salary.grid(row=3, column=1, pady=5, padx=5)
+        ttk.Label(inner_form, text="Cargo:", **style_config).grid(row=2, column=0, sticky=W, pady=8, padx=5)
+        self.entry_position = ttk.Entry(inner_form, width=35, font=("Segoe UI", 10))
+        self.entry_position.grid(row=2, column=1, pady=8, padx=5, sticky=EW)
         
-        ttk.Label(inner_form, text="Horas Extras:").grid(row=4, column=0, sticky=W, pady=5)
-        self.entry_hours_extra = ttk.Entry(inner_form, width=30)
-        self.entry_hours_extra.grid(row=4, column=1, pady=5, padx=5)
+        sep1 = ttk.Separator(inner_form, orient="horizontal")
+        sep1.grid(row=3, column=0, columnspan=2, sticky=EW, pady=10)
         
-        ttk.Label(inner_form, text="Tarifa/Hora:").grid(row=5, column=0, sticky=W, pady=5)
-        self.entry_hourly_rate = ttk.Entry(inner_form, width=30)
-        self.entry_hourly_rate.grid(row=5, column=1, pady=5, padx=5)
+        ttk.Label(inner_form, text="💰 Salario Base:", **style_config).grid(row=4, column=0, sticky=W, pady=8, padx=5)
+        self.entry_salary = ttk.Entry(inner_form, width=35, font=("Segoe UI", 10))
+        self.entry_salary.grid(row=4, column=1, pady=8, padx=5, sticky=EW)
         
-        ttk.Label(inner_form, text="Tasa INATEC %:").grid(row=6, column=0, sticky=W, pady=5)
-        self.entry_afp = ttk.Entry(inner_form, width=30)
-        self.entry_afp.insert(0, "2")
-        self.entry_afp.grid(row=6, column=1, pady=5, padx=5)
+        ttk.Label(inner_form, text="⏰ Horas Extras:", **style_config).grid(row=5, column=0, sticky=W, pady=8, padx=5)
+        self.entry_hours_extra = ttk.Entry(inner_form, width=35, font=("Segoe UI", 10))
+        self.entry_hours_extra.grid(row=5, column=1, pady=8, padx=5, sticky=EW)
         
-        ttk.Label(inner_form, text="Tasa INSS %:").grid(row=7, column=0, sticky=W, pady=5)
-        self.entry_isss = ttk.Entry(inner_form, width=30)
-        self.entry_isss.insert(0, "6.25")
-        self.entry_isss.grid(row=7, column=1, pady=5, padx=5)
+        ttk.Label(inner_form, text="💵 Tarifa/Hora:", **style_config).grid(row=6, column=0, sticky=W, pady=8, padx=5)
+        self.entry_hourly_rate = ttk.Entry(inner_form, width=35, font=("Segoe UI", 10))
+        self.entry_hourly_rate.grid(row=6, column=1, pady=8, padx=5, sticky=EW)
+        
+        sep2 = ttk.Separator(inner_form, orient="horizontal")
+        sep2.grid(row=7, column=0, columnspan=2, sticky=EW, pady=10)
+        
+        ttk.Label(inner_form, text="📊 Tasa INATEC %:", **style_config).grid(row=8, column=0, sticky=W, pady=8, padx=5)
+        self.entry_afp = ttk.Entry(inner_form, width=35, font=("Segoe UI", 10))
+        self.entry_afp.insert(0, "6.25")
+        self.entry_afp.grid(row=8, column=1, pady=8, padx=5, sticky=EW)
+        
+        ttk.Label(inner_form, text="🏥 Tasa INSS %:", **style_config).grid(row=9, column=0, sticky=W, pady=8, padx=5)
+        self.entry_isss = ttk.Entry(inner_form, width=35, font=("Segoe UI", 10))
+        self.entry_isss.insert(0, "3.0")
+        self.entry_isss.grid(row=9, column=1, pady=8, padx=5, sticky=EW)
+        
+        inner_form.columnconfigure(1, weight=1)
         
         btn_frame = ttk.Frame(inner_form)
-        btn_frame.grid(row=8, column=0, columnspan=2, pady=15)
+        btn_frame.grid(row=10, column=0, columnspan=2, pady=20)
         
-        self.btn_save = ttk.Button(btn_frame, text="Guardar", command=self.save_employee, bootstyle="success")
-        self.btn_save.pack(side=LEFT, padx=5)
+        self.btn_save = ttk.Button(btn_frame, text="  Guardar  ", command=self.save_employee, bootstyle="success", cursor="hand2")
+        self.btn_save.pack(side=LEFT, padx=8, pady=5)
         
-        self.btn_new = ttk.Button(btn_frame, text="Nuevo", command=self.clear_form, bootstyle="secondary")
-        self.btn_new.pack(side=LEFT, padx=5)
+        self.btn_new = ttk.Button(btn_frame, text="  Nuevo  ", command=self.clear_form, bootstyle="info", cursor="hand2")
+        self.btn_new.pack(side=LEFT, padx=8, pady=5)
         
-        self.btn_delete = ttk.Button(btn_frame, text="Eliminar", command=self.delete_employee, bootstyle="danger")
-        self.btn_delete.pack(side=LEFT, padx=5)
+        self.btn_delete = ttk.Button(btn_frame, text="  Eliminar  ", command=self.delete_employee, bootstyle="danger", cursor="hand2")
+        self.btn_delete.pack(side=LEFT, padx=8, pady=5)
         
-        right_frame = ttk.Frame(self.tab_employees)
-        right_frame.pack(side=RIGHT, fill=BOTH, expand=YES, padx=10, pady=10)
+        right_frame = ttk.Frame(self.tab_employees, padding=10)
+        right_frame.pack(side=RIGHT, fill=BOTH, expand=YES)
+        
+        header_frame = ttk.Frame(right_frame)
+        header_frame.pack(fill=X, pady=(0, 15))
+        ttk.Label(header_frame, text="📋 Lista de Empleados", font=("Segoe UI", 14, "bold")).pack(side=LEFT)
+        
+        table_container = ttk.Frame(right_frame)
+        table_container.pack(fill=BOTH, expand=YES)
         
         self.emp_table = Tableview(
-            right_frame,
+            table_container,
             coldata=[
                 {"text": "ID", "anchor": "center", "width": 50},
-                {"text": "Nombre", "anchor": "w", "width": 150},
-                {"text": "DPI", "anchor": "center", "width": 120},
-                {"text": "Cargo", "anchor": "w", "width": 120},
-                {"text": "Salario", "anchor": "e", "width": 100},
+                {"text": "Nombre", "anchor": "w", "width": 180},
+                {"text": "DPI", "anchor": "center", "width": 140},
+                {"text": "Cargo", "anchor": "w", "width": 140},
+                {"text": "Salario", "anchor": "e", "width": 120},
             ],
             rowdata=[],
             bootstyle="primary",
-            height=20,
+            height=18,
             paginated=True,
-            on_select=self.on_employee_select
+            on_select=self.on_employee_select,
+            stripecolor=("lightgray", "#2a2a2a")
         )
-        self.emp_table.pack(fill=BOTH, expand=YES)
+        self.emp_table.pack(fill=BOTH, expand=YES, pady=(0, 10))
+        
+        status_frame = ttk.Frame(right_frame)
+        status_frame.pack(fill=X)
+        self.lbl_employee_count = ttk.Label(status_frame, text="Total: 0 empleados", font=("Segoe UI", 9), foreground="gray")
+        self.lbl_employee_count.pack(side=LEFT)
 
     def build_payroll_tab(self):
-        control_frame = ttk.Frame(self.tab_payroll)
-        control_frame.pack(fill=X, padx=10, pady=10)
+        header_frame = ttk.Frame(self.tab_payroll, padding=15)
+        header_frame.pack(fill=X)
+        ttk.Label(header_frame, text="⚙ Cálculo de Nómina", font=("Segoe UI", 14, "bold")).pack(side=LEFT)
         
-        ttk.Label(control_frame, text="Mes:").pack(side=LEFT, padx=5)
-        self.payroll_month = ttk.Combobox(control_frame, values=list(range(1, 13)), width=5, state="readonly")
+        control_frame = ttk.LabelFrame(self.tab_payroll, text="  Período  ")
+        control_frame.pack(fill=X, padx=15, pady=(0, 10))
+        
+        date_frame = ttk.Frame(control_frame)
+        date_frame.pack(side=LEFT)
+        
+        ttk.Label(date_frame, text="📅 Mes:", font=("Segoe UI", 10)).pack(side=LEFT, padx=5)
+        self.payroll_month = ttk.Combobox(date_frame, values=list(range(1, 13)), width=5, state="readonly", font=("Segoe UI", 10))
         self.payroll_month.current(datetime.now().month - 1)
         self.payroll_month.pack(side=LEFT, padx=5)
         
-        ttk.Label(control_frame, text="Año:").pack(side=LEFT, padx=5)
+        ttk.Label(date_frame, text="Año:", font=("Segoe UI", 10)).pack(side=LEFT, padx=5)
         current_year = datetime.now().year
-        self.payroll_year = ttk.Combobox(control_frame, values=list(range(current_year - 5, current_year + 2)), width=8, state="readonly")
+        self.payroll_year = ttk.Combobox(date_frame, values=list(range(current_year - 5, current_year + 2)), width=8, state="readonly", font=("Segoe UI", 10))
         self.payroll_year.set(current_year)
         self.payroll_year.pack(side=LEFT, padx=5)
         
-        self.btn_calculate = ttk.Button(control_frame, text="Calcular Nómina", command=self.calculate_payroll, bootstyle="primary")
-        self.btn_calculate.pack(side=LEFT, padx=15)
+        self.btn_calculate = ttk.Button(control_frame, text="  Calcular Nómina  ", command=self.calculate_payroll, bootstyle="primary", cursor="hand2")
+        self.btn_calculate.pack(side=LEFT, padx=20)
         
-        table_frame = ttk.Frame(self.tab_payroll)
-        table_frame.pack(fill=BOTH, expand=YES, padx=10, pady=5)
+        table_frame = ttk.Frame(self.tab_payroll, padding=(15, 0, 15, 15))
+        table_frame.pack(fill=BOTH, expand=YES)
         
         self.payroll_table = Tableview(
             table_frame,
             coldata=[
+                {"text": "Nombre", "anchor": "w", "width": 180},
+                {"text": "Salario Base", "anchor": "e", "width": 110},
+                {"text": "Horas Extras", "anchor": "e", "width": 110},
+                {"text": "INATEC", "anchor": "e", "width": 90},
+                {"text": "INSS", "anchor": "e", "width": 90},
+                {"text": "Otros", "anchor": "e", "width": 90},
+                {"text": "Salario Neto", "anchor": "e", "width": 120},
+            ],
+            rowdata=[],
+            bootstyle="success",
+            height=18,
+            paginated=True,
+            stripecolor=("lightgray", "#2a2a2a")
+        )
+        self.payroll_table.pack(fill=BOTH, expand=YES)
+        
+        self.lbl_payroll_totals = ttk.Label(table_frame, text="", font=("Segoe UI", 10, "bold"), foreground="gray")
+        self.lbl_payroll_totals.pack(side=BOTTOM, pady=(10, 0))
+
+    def build_reports_tab(self):
+        header_frame = ttk.Frame(self.tab_reports, padding=15)
+        header_frame.pack(fill=X)
+        ttk.Label(header_frame, text="📊 Reportes de Nómina", font=("Segoe UI", 14, "bold")).pack(side=LEFT)
+        
+        control_frame = ttk.LabelFrame(self.tab_reports, text="  Filtrar por Período  ")
+        control_frame.pack(fill=X, padx=15, pady=(0, 10))
+        
+        date_frame = ttk.Frame(control_frame)
+        date_frame.pack(side=LEFT)
+        
+        ttk.Label(date_frame, text="📅 Mes:", font=("Segoe UI", 10)).pack(side=LEFT, padx=5)
+        self.report_month = ttk.Combobox(date_frame, values=list(range(1, 13)), width=5, state="readonly", font=("Segoe UI", 10))
+        self.report_month.current(datetime.now().month - 1)
+        self.report_month.pack(side=LEFT, padx=5)
+        
+        ttk.Label(date_frame, text="Año:", font=("Segoe UI", 10)).pack(side=LEFT, padx=5)
+        current_year = datetime.now().year
+        self.report_year = ttk.Combobox(date_frame, values=list(range(current_year - 5, current_year + 2)), width=8, state="readonly", font=("Segoe UI", 10))
+        self.report_year.set(current_year)
+        self.report_year.pack(side=LEFT, padx=5)
+        
+        self.btn_load_report = ttk.Button(control_frame, text="  Cargar Reporte  ", command=self.load_report, bootstyle="info", cursor="hand2")
+        self.btn_load_report.pack(side=LEFT, padx=20)
+        
+        btn_export_frame = ttk.Frame(control_frame)
+        btn_export_frame.pack(side=RIGHT, padx=10)
+        
+        self.btn_pdf = ttk.Button(btn_export_frame, text="  PDF  ", command=self.export_pdf, bootstyle="danger", cursor="hand2")
+        self.btn_pdf.pack(side=LEFT, padx=5)
+        
+        self.btn_excel = ttk.Button(btn_export_frame, text="  Excel  ", command=self.export_excel, bootstyle="success", cursor="hand2")
+        self.btn_excel.pack(side=LEFT, padx=5)
+        
+        report_frame = ttk.Frame(self.tab_reports, padding=(15, 0, 15, 15))
+        report_frame.pack(fill=BOTH, expand=YES)
+        
+        self.report_table = Tableview(
+            report_frame,
+            coldata=[
                 {"text": "Nombre", "anchor": "w", "width": 150},
+                {"text": "DPI", "anchor": "center", "width": 120},
+                {"text": "Cargo", "anchor": "w", "width": 120},
                 {"text": "Salario Base", "anchor": "e", "width": 100},
                 {"text": "Horas Extras", "anchor": "e", "width": 100},
                 {"text": "INATEC", "anchor": "e", "width": 80},
@@ -148,70 +240,23 @@ class MainWindow(ttk.Window):
                 {"text": "Salario Neto", "anchor": "e", "width": 100},
             ],
             rowdata=[],
-            bootstyle="success",
-            height=20,
-            paginated=True
-        )
-        self.payroll_table.pack(fill=BOTH, expand=YES)
-
-    def build_reports_tab(self):
-        control_frame = ttk.Frame(self.tab_reports)
-        control_frame.pack(fill=X, padx=10, pady=10)
-        
-        ttk.Label(control_frame, text="Mes:").pack(side=LEFT, padx=5)
-        self.report_month = ttk.Combobox(control_frame, values=list(range(1, 13)), width=5, state="readonly")
-        self.report_month.current(datetime.now().month - 1)
-        self.report_month.pack(side=LEFT, padx=5)
-        
-        ttk.Label(control_frame, text="Año:").pack(side=LEFT, padx=5)
-        current_year = datetime.now().year
-        self.report_year = ttk.Combobox(control_frame, values=list(range(current_year - 5, current_year + 2)), width=8, state="readonly")
-        self.report_year.set(current_year)
-        self.report_year.pack(side=LEFT, padx=5)
-        
-        self.btn_load_report = ttk.Button(control_frame, text="Cargar Reporte", command=self.load_report, bootstyle="info")
-        self.btn_load_report.pack(side=LEFT, padx=15)
-        
-        btn_export_frame = ttk.Frame(control_frame)
-        btn_export_frame.pack(side=RIGHT, padx=10)
-        
-        self.btn_pdf = ttk.Button(btn_export_frame, text="Exportar PDF", command=self.export_pdf, bootstyle="danger")
-        self.btn_pdf.pack(side=LEFT, padx=5)
-        
-        self.btn_excel = ttk.Button(btn_export_frame, text="Exportar Excel", command=self.export_excel, bootstyle="success")
-        self.btn_excel.pack(side=LEFT, padx=5)
-        
-        report_frame = ttk.Frame(self.tab_reports)
-        report_frame.pack(fill=BOTH, expand=YES, padx=10, pady=5)
-        
-        self.report_table = Tableview(
-            report_frame,
-            coldata=[
-                {"text": "Nombre", "anchor": "w", "width": 120},
-                {"text": "DPI", "anchor": "center", "width": 100},
-                {"text": "Cargo", "anchor": "w", "width": 100},
-                {"text": "Salario Base", "anchor": "e", "width": 90},
-                {"text": "Horas Extras", "anchor": "e", "width": 90},
-                {"text": "INATEC", "anchor": "e", "width": 70},
-                {"text": "INSS", "anchor": "e", "width": 70},
-                {"text": "Otros", "anchor": "e", "width": 70},
-                {"text": "Salario Neto", "anchor": "e", "width": 90},
-            ],
-            rowdata=[],
             bootstyle="warning",
-            height=20,
-            paginated=True
+            height=16,
+            paginated=True,
+            stripecolor=("lightgray", "#2a2a2a")
         )
         self.report_table.pack(fill=BOTH, expand=YES)
 
     def refresh_employees(self):
         employees = Employee.get_all()
         self.emp_table.delete_rows()
+        count = len(employees)
         for emp in employees:
             self.emp_table.insert_row(values=(
                 emp.id, emp.name, emp.dpi, emp.position, f"C$ {emp.salary:,.2f}"
             ))
         self.emp_table.load_table_data()
+        self.lbl_employee_count.config(text=f"Total: {count} empleado{'s' if count != 1 else ''}")
 
     def on_employee_select(self, event):
         selection = self.emp_table.view.selection()
